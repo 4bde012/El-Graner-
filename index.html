@@ -3,9 +3,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101510">
-  <meta name="description" content="Propuesta de página web para El Graner, Manresa. Descubre el restaurante y solicita una reserva de mesa.">
+  <meta name="description" content="Propuesta web de El Graner: restaurante, carta y solicitudes de reserva.">
   <title>El Graner | Restaurante en Manresa</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,231 +20,259 @@
       --cream: #f7f3e9;
       --muted: #b6b9af;
       --line: rgba(255,255,255,.12);
-      --gold: #d5b879;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
     body {
       margin: 0;
       background: var(--bg);
       color: var(--cream);
       font-family: "DM Sans", sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    body, input, select, button { font-family: "DM Sans", sans-serif; }
+    body, input, select, textarea, button { font-family: "DM Sans", sans-serif; }
     a { color: inherit; text-decoration: none; }
+    img { width: 100%; display: block; object-fit: cover; }
     button { cursor: pointer; }
-    img { display: block; width: 100%; object-fit: cover; }
     .container { width: min(1120px, 90%); margin: auto; }
     .serif { font-family: "Playfair Display", serif; }
     .muted { color: var(--muted); }
     .eyebrow {
       color: var(--green);
-      font-size: .75rem;
+      font-size: .76rem;
+      letter-spacing: .19em;
       font-weight: 700;
-      letter-spacing: .2em;
       text-transform: uppercase;
     }
 
     .demo-banner {
-      background: #273522;
-      color: #e9f4dd;
-      padding: 8px 15px;
       text-align: center;
-      font-size: .78rem;
+      padding: 7px 12px;
+      background: #263421;
+      color: #e9f4dd;
+      font-size: .76rem;
     }
 
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(16,21,16,.94);
+      z-index: 50;
+      background: rgba(16,21,16,.93);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
     }
 
     nav {
       min-height: 76px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 22px;
+      align-items: center;
+      gap: 20px;
     }
 
-    .logo { font-size: 1.45rem; font-weight: 700; letter-spacing: .08em; }
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      white-space: nowrap;
+    }
     .logo span { color: var(--green); }
-    .nav-links { display: flex; align-items: center; gap: 25px; font-size: .9rem; }
+
+    .nav-links { display: flex; gap: 24px; align-items: center; font-size: .9rem; }
+    .nav-links a { transition: color .2s; }
     .nav-links a:hover { color: var(--green); }
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
 
     .btn {
       display: inline-flex;
       justify-content: center;
       align-items: center;
       gap: 8px;
-      min-height: 45px;
+      min-height: 46px;
       padding: 11px 18px;
       border: 1px solid transparent;
       border-radius: 6px;
-      font-weight: 700;
       font-size: .9rem;
-      transition: .2s;
+      font-weight: 700;
+      transition: transform .2s, background .2s, border-color .2s;
     }
+
+    .btn:hover { transform: translateY(-2px); }
     .btn-primary { background: var(--green); color: #172015; }
-    .btn-primary:hover { background: #d8f2bd; transform: translateY(-1px); }
-    .btn-outline { border-color: var(--line); background: transparent; color: var(--cream); }
+    .btn-primary:hover { background: #d9f3bd; }
+    .btn-outline { border-color: var(--line); color: var(--cream); background: transparent; }
     .btn-outline:hover { border-color: var(--green); }
-    .btn-dark { background: #242b22; color: var(--cream); border-color: var(--line); }
-    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .btn:disabled { opacity: .6; cursor: wait; transform: none; }
 
     .hero {
-      min-height: 630px;
-      display: grid;
+      min-height: 650px;
+      display: flex;
       align-items: center;
-      position: relative;
-      overflow: hidden;
       background:
-        linear-gradient(90deg, rgba(16,21,16,.98) 0%, rgba(16,21,16,.84) 45%, rgba(16,21,16,.18) 100%),
-        url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=85") center/cover;
+        linear-gradient(90deg, rgba(16,21,16,.97), rgba(16,21,16,.77) 48%, rgba(16,21,16,.25)),
+        url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1900&q=85") center/cover;
     }
 
-    .hero-content { max-width: 660px; padding: 90px 0; }
-    h1, h2, h3, p { margin-top: 0; }
+    .hero-content { max-width: 680px; padding: 95px 0; }
     h1 {
       font-family: "Playfair Display", serif;
-      font-size: clamp(3.3rem, 8vw, 6.4rem);
-      line-height: 1.03;
-      margin: 18px 0 22px;
       font-weight: 500;
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
+      line-height: 1.04;
+      margin: 18px 0;
     }
     h1 em { color: var(--green); font-style: normal; }
-    .hero p { color: #e0e0d8; max-width: 500px; font-size: 1.08rem; }
-    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
-    .hero-note { margin-top: 24px; font-size: .78rem; color: #d1d2c9; }
+    .hero p { max-width: 510px; color: #e1e2d9; font-size: 1.08rem; }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .small-note { font-size: .78rem; color: #d0d2c8; margin-top: 22px; }
 
-    section { padding: 90px 0; }
-    .section-head { max-width: 650px; margin-bottom: 38px; }
+    section { padding: 88px 0; }
+    .section-head { max-width: 670px; margin-bottom: 35px; }
     h2 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      line-height: 1.15;
-      font-weight: 500;
-      margin: 12px 0 16px;
+      font: 500 clamp(2.2rem, 5vw, 3.5rem)/1.15 "Playfair Display", serif;
+      margin: 12px 0 18px;
     }
 
     .intro-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 55px;
       align-items: center;
+      gap: 55px;
     }
     .intro-image { height: 430px; border-radius: 8px; }
     .intro-copy p { color: var(--muted); }
-    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
+    .features { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 25px; }
     .feature { padding: 15px; border: 1px solid var(--line); border-radius: 6px; }
     .feature strong { display: block; color: var(--green); margin-bottom: 4px; }
-    .feature span { font-size: .83rem; color: var(--muted); }
+    .feature span { color: var(--muted); font-size: .83rem; }
 
-    .menu-section { background: #151b15; }
+    .menu-section, .account-section { background: #151b15; }
     .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .menu-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
       overflow: hidden;
+      transition: transform .25s, border-color .25s;
+    }
+    .menu-card:hover { transform: translateY(-6px); border-color: #78965d; }
+    .menu-card img { height: 215px; }
+    .menu-card-content { padding: 22px; }
+    .menu-card h3 { font: 500 1.45rem "Playfair Display", serif; margin: 0 0 8px; }
+    .menu-card p { font-size: .92rem; color: var(--muted); margin: 0; }
+    .disclaimer { font-size: .8rem; color: var(--muted); margin-top: 22px; }
+
+    .booking-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items: start; }
+    .info-line { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .info-line strong { display: block; color: var(--green); }
+    .info-line span { font-size: .92rem; color: var(--muted); }
+    .booking-card, .account-box, .location-card {
+      padding: 30px;
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 9px;
     }
-    .menu-card img { height: 210px; }
-    .menu-card-content { padding: 22px; }
-    .menu-card h3 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: 8px; }
-    .menu-card p { color: var(--muted); font-size: .92rem; margin-bottom: 0; }
-    .menu-disclaimer { font-size: .8rem; color: var(--muted); margin-top: 22px; }
-
-    .booking-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 55px; align-items: start; }
-    .booking-info { padding-top: 12px; }
-    .info-line { padding: 16px 0; border-bottom: 1px solid var(--line); }
-    .info-line strong { display: block; color: var(--green); margin-bottom: 5px; }
-    .info-line span { color: var(--muted); font-size: .93rem; overflow-wrap: anywhere; }
-    .booking-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 30px; }
-    .booking-card h3 { font-family: "Playfair Display", serif; font-size: 1.8rem; margin-bottom: 8px; }
+    .booking-card h3 { font: 500 1.8rem "Playfair Display", serif; margin: 0 0 8px; }
     .booking-card > p { color: var(--muted); font-size: .9rem; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; margin-top: 25px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; margin-top: 24px; }
     .field { display: flex; flex-direction: column; gap: 7px; }
     .field.full { grid-column: 1 / -1; }
     label { font-size: .84rem; font-weight: 600; }
+
     input, select, textarea {
       width: 100%;
-      background: #101510;
-      color: var(--cream);
+      min-height: 46px;
+      padding: 12px;
       border: 1px solid #3b4438;
       border-radius: 5px;
-      padding: 12px;
+      color: var(--cream);
+      background: #101510;
       font-size: .92rem;
-      min-height: 46px;
     }
-    textarea { resize: vertical; min-height: 85px; }
-    input:focus, select:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+    textarea { min-height: 90px; resize: vertical; }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--green);
+      outline-offset: 2px;
+    }
     input[type="checkbox"] { width: 17px; min-height: auto; accent-color: var(--green); }
-    .check-row { display: flex; gap: 9px; align-items: flex-start; margin: 18px 0; font-size: .8rem; color: var(--muted); }
-    .check-row label { font-weight: 400; }
-    .form-message { display: none; padding: 14px; margin-top: 18px; border-radius: 5px; background: #273522; color: #e9f4dd; font-size: .9rem; }
-    .form-message.show { display: block; }
+    .consent { display: flex; align-items: flex-start; gap: 10px; margin: 18px 0; }
+    .consent label { font-weight: 400; font-size: .8rem; color: var(--muted); }
+    .status { display: none; padding: 13px; margin-top: 17px; border-radius: 5px; font-size: .9rem; overflow-wrap: anywhere; }
+    .status.show { display: block; }
+    .status.success { background: #263b25; color: #e5f5d9; }
+    .status.error { background: #482c28; color: #ffe4dc; }
+    .status.info { background: #263421; color: #e9f4dd; }
 
-    .account-section { background: #151b15; }
-    .account-box { max-width: 720px; margin: auto; background: var(--panel); padding: 35px; border: 1px solid var(--line); border-radius: 10px; }
+    .account-box { max-width: 730px; margin: auto; }
     .account-box h2 { font-size: 2.5rem; }
-    .auth-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+    .auth-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 25px 0; }
     .auth-buttons button { width: 100%; }
-    .separator { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: .8rem; margin: 20px 0; }
-    .separator::before, .separator::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+    .separator { display: flex; gap: 12px; align-items: center; color: var(--muted); font-size: .8rem; margin: 20px 0; }
+    .separator::before, .separator::after { content: ""; height: 1px; flex: 1; background: var(--line); }
     .account-form { display: grid; gap: 14px; }
-    .account-note { font-size: .8rem; color: var(--muted); margin: 16px 0 0; }
-    .account-status { margin-top: 16px; font-size: .9rem; color: var(--green); overflow-wrap: anywhere; }
+    .account-note { color: var(--muted); font-size: .8rem; margin: 16px 0 0; }
 
-    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; align-items: stretch; }
-    .map-frame { border: 0; width: 100%; height: 330px; border-radius: 8px; background: var(--panel); }
-    .location-card { padding: 25px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
-    footer { border-top: 1px solid var(--line); padding: 35px 0; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
-    .footer-small { color: var(--muted); font-size: .8rem; max-width: 660px; }
-
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .map-frame { width: 100%; height: 330px; border: 0; border-radius: 8px; background: var(--panel); }
+    footer { padding: 35px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-note { color: var(--muted); font-size: .8rem; max-width: 650px; }
     .mobile-menu { display: none; }
+
+    /* Animaciones de entrada */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .12s; }
+    .delay-2 { transition-delay: .22s; }
+    .delay-3 { transition-delay: .32s; }
 
     @media (max-width: 850px) {
       .nav-links { display: none; }
       .mobile-menu { display: inline-flex; }
       .intro-grid, .booking-grid, .location-grid { grid-template-columns: 1fr; gap: 30px; }
-      .intro-image { height: 320px; }
+      .intro-image { height: 330px; }
       .menu-grid { grid-template-columns: 1fr 1fr; }
-      .hero { min-height: 560px; }
       section { padding: 65px 0; }
+      .hero { min-height: 560px; }
     }
 
     @media (max-width: 560px) {
-      .nav-actions .btn-outline { display: none; }
-      .logo { font-size: 1.2rem; }
-      .hero { min-height: 560px; background-position: 60% center; }
+      .container { width: 91%; }
+      .nav-actions .btn-outline:not(.mobile-menu) { display: none; }
+      .logo { font-size: 1.16rem; }
+      .hero { min-height: 540px; background-position: 60% center; }
       .hero-content { padding: 65px 0; }
-      .menu-grid, .feature-list, .form-grid, .auth-buttons { grid-template-columns: 1fr; }
+      .menu-grid, .features, .form-grid, .auth-buttons { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
-      .booking-card, .account-box { padding: 22px; }
+      .booking-card, .account-box, .location-card { padding: 21px; }
       .menu-card img { height: 190px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 
 <body>
   <div class="demo-banner">
-    DEMOSTRACIÓN NO OFICIAL · Propuesta de diseño creada por Abde
+    DEMOSTRACIÓN NO OFICIAL · Propuesta web creada por Abde
   </div>
 
   <header>
     <nav class="container">
-      <a class="logo" href="#inicio" aria-label="El Graner, inicio">EL <span>GRANER</span></a>
+      <a class="logo" href="#inicio">EL <span>GRANER</span></a>
 
       <div class="nav-links" id="navLinks">
-        <a href="#nosotros">El restaurante</a>
+        <a href="#nosotros">Restaurante</a>
         <a href="#carta">Carta</a>
         <a href="#reservas">Reservas</a>
         <a href="#ubicacion">Ubicación</a>
@@ -253,7 +281,7 @@
       <div class="nav-actions">
         <a class="btn btn-outline" href="#cuenta">Mi cuenta</a>
         <a class="btn btn-primary" href="#reservas">Reservar mesa</a>
-        <button class="btn btn-outline mobile-menu" id="menuToggle" type="button" aria-label="Mostrar navegación">☰</button>
+        <button class="btn btn-outline mobile-menu" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false">☰</button>
       </div>
     </nav>
   </header>
@@ -263,47 +291,34 @@
       <div class="container">
         <div class="hero-content">
           <div class="eyebrow">Una propuesta gastronómica · Manresa</div>
-          <h1 class="serif">Buen producto.<br><em>Buenos momentos.</em></h1>
-          <p>Un espacio pensado para compartir, descubrir nuevos sabores y disfrutar de una buena mesa.</p>
+          <h1>Buen producto.<br><em>Buenos momentos.</em></h1>
+          <p>Una propuesta de diseño para presentar un restaurante, descubrir su carta y facilitar las solicitudes de reserva desde cualquier dispositivo.</p>
           <div class="hero-buttons">
-            <a class="btn btn-primary" href="#reservas">Solicitar una reserva ↗</a>
+            <a class="btn btn-primary" href="#reservas">Solicitar una mesa ↗</a>
             <a class="btn btn-outline" href="#carta">Descubrir la carta</a>
           </div>
-          <div class="hero-note">Las fotografías y los textos de esta página son ilustrativos.</div>
+          <div class="small-note">Las imágenes y los textos son ilustrativos y deben confirmarse con el negocio.</div>
         </div>
       </div>
     </section>
 
     <section id="nosotros">
       <div class="container intro-grid">
-        <img class="intro-image"
+        <img class="intro-image reveal"
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1100&q=85"
-          alt="Mesa preparada en un restaurante"
-          loading="lazy">
+          alt="Mesa preparada en un restaurante" loading="lazy">
 
-        <div class="intro-copy">
+        <div class="intro-copy reveal delay-1">
           <div class="eyebrow">El placer de compartir</div>
           <h2>Una mesa para cada ocasión</h2>
           <p>Una comida especial, una cena con amigos o un encuentro en familia: cada momento merece su espacio.</p>
-          <p>Esta propuesta de página web está diseñada para presentar el restaurante, facilitar las consultas y permitir que los clientes soliciten una mesa desde el móvil.</p>
+          <p>Esta propuesta está pensada para mostrar información, facilitar consultas y ofrecer un formulario sencillo para solicitar una reserva.</p>
 
-          <div class="feature-list">
-            <div class="feature">
-              <strong>01 · Restaurante</strong>
-              <span>Información y presentación</span>
-            </div>
-            <div class="feature">
-              <strong>02 · Carta</strong>
-              <span>Platos y especialidades</span>
-            </div>
-            <div class="feature">
-              <strong>03 · Reservas</strong>
-              <span>Formulario sencillo</span>
-            </div>
-            <div class="feature">
-              <strong>04 · Contacto</strong>
-              <span>Ubicación y consultas</span>
-            </div>
+          <div class="features">
+            <div class="feature"><strong>01 · Restaurante</strong><span>Presentación del negocio</span></div>
+            <div class="feature"><strong>02 · Carta</strong><span>Platos y especialidades</span></div>
+            <div class="feature"><strong>03 · Reservas</strong><span>Solicitud por correo</span></div>
+            <div class="feature"><strong>04 · Contacto</strong><span>Mapa y ubicación</span></div>
           </div>
         </div>
       </div>
@@ -311,92 +326,87 @@
 
     <section class="menu-section" id="carta">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <div class="eyebrow">Nuestra propuesta</div>
           <h2>Una carta que invita a disfrutar</h2>
-          <p class="muted">Ejemplos visuales para mostrar cómo podría organizarse la carta del restaurante.</p>
+          <p class="muted">Ejemplo visual de cómo podrían organizarse las categorías de la carta real.</p>
         </div>
 
         <div class="menu-grid">
-          <article class="menu-card">
-            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
-              alt="Ensalada fresca" loading="lazy">
+          <article class="menu-card reveal">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80" alt="Ensalada fresca" loading="lazy">
             <div class="menu-card-content">
               <h3>Para empezar</h3>
-              <p>Una selección de entrantes para abrir el apetito y compartir en la mesa.</p>
+              <p>Entrantes para abrir el apetito y compartir en la mesa.</p>
             </div>
           </article>
 
-          <article class="menu-card">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
-              alt="Plato de carne preparado" loading="lazy">
+          <article class="menu-card reveal delay-1">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Plato de carne" loading="lazy">
             <div class="menu-card-content">
               <h3>Platos principales</h3>
-              <p>Un espacio para destacar las especialidades y los platos más populares.</p>
+              <p>Un espacio para destacar las especialidades del restaurante.</p>
             </div>
           </article>
 
-          <article class="menu-card">
-            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80"
-              alt="Postre servido en un plato" loading="lazy">
+          <article class="menu-card reveal delay-2">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80" alt="Postre servido en un plato" loading="lazy">
             <div class="menu-card-content">
               <h3>El toque dulce</h3>
-              <p>Postres y propuestas para terminar la experiencia con buen sabor.</p>
+              <p>Postres y propuestas para terminar una comida especial.</p>
             </div>
           </article>
         </div>
 
-        <p class="menu-disclaimer">
-          Nota: estos platos, fotografías y descripciones son ejemplos. No representan la carta real ni confirman disponibilidad, ingredientes o precios.
-        </p>
+        <p class="disclaimer">Los platos, fotografías, ingredientes y precios son ejemplos; no representan la carta confirmada de El Graner.</p>
       </div>
     </section>
 
     <section id="reservas">
       <div class="container booking-grid">
-        <div class="booking-info">
+        <div class="reveal">
           <div class="eyebrow">Tu próxima visita</div>
           <h2>Solicita tu mesa</h2>
-          <p class="muted">Indica cuándo te gustaría venir y cuántas personas sois. En esta versión de demostración la solicitud no se envía al restaurante.</p>
+          <p class="muted">Rellena el formulario para enviar una solicitud informativa por correo cuando el servicio esté configurado.</p>
 
           <div class="info-line">
             <strong>Ubicación</strong>
-            <span>Manresa, Barcelona · Dirección pendiente de confirmar</span>
+            <span>Manresa, Barcelona · Dirección pendiente de confirmación</span>
           </div>
           <div class="info-line">
-            <strong>Horario</strong>
-            <span>Consulta los horarios reales del establecimiento antes de visitarlo.</span>
+            <strong>Tipo de solicitud</strong>
+            <span>Solicitud de reserva, sujeta a confirmación del restaurante.</span>
           </div>
           <div class="info-line">
-            <strong>Confirmación</strong>
-            <span>Una reserva real necesita conexión con el restaurante o con un sistema de reservas.</span>
+            <strong>Importante</strong>
+            <span>Enviar el formulario no significa que haya una mesa confirmada.</span>
           </div>
         </div>
 
-        <div class="booking-card">
-          <h3>Reserva una mesa</h3>
-          <p>Completa los datos de tu solicitud.</p>
+        <div class="booking-card reveal delay-1">
+          <h3>Solicitud de reserva</h3>
+          <p>Todos los campos marcados como obligatorios deben completarse.</p>
 
           <form id="bookingForm">
             <div class="form-grid">
               <div class="field">
-                <label for="bookingName">Nombre y apellidos</label>
-                <input id="bookingName" name="name" autocomplete="name" required maxlength="100" placeholder="Tu nombre">
+                <label for="name">Nombre y apellidos *</label>
+                <input id="name" name="name" autocomplete="name" maxlength="100" required>
               </div>
 
               <div class="field">
-                <label for="bookingEmail">Correo electrónico</label>
-                <input id="bookingEmail" name="email" type="email" autocomplete="email" required maxlength="150" placeholder="nombre@correo.com">
+                <label for="email">Correo electrónico *</label>
+                <input id="email" name="email" type="email" autocomplete="email" maxlength="150" required>
               </div>
 
               <div class="field">
-                <label for="bookingDate">Fecha</label>
-                <input id="bookingDate" name="date" type="date" required>
+                <label for="date">Fecha deseada *</label>
+                <input id="date" name="date" type="date" required>
               </div>
 
               <div class="field">
-                <label for="bookingTime">Hora solicitada</label>
-                <select id="bookingTime" name="time" required>
+                <label for="time">Hora deseada *</label>
+                <select id="time" name="time" required>
                   <option value="">Selecciona una hora</option>
                   <option>13:00</option>
                   <option>13:30</option>
@@ -410,8 +420,8 @@
               </div>
 
               <div class="field">
-                <label for="bookingGuests">Número de personas</label>
-                <select id="bookingGuests" name="guests" required>
+                <label for="guests">Número de personas *</label>
+                <select id="guests" name="guests" required>
                   <option value="1">1 persona</option>
                   <option value="2" selected>2 personas</option>
                   <option value="3">3 personas</option>
@@ -424,23 +434,28 @@
               </div>
 
               <div class="field">
-                <label for="bookingPhone">Teléfono (opcional)</label>
-                <input id="bookingPhone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Tu teléfono">
+                <label for="phone">Teléfono (opcional)</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="30">
               </div>
 
               <div class="field full">
-                <label for="bookingNotes">Comentarios (opcional)</label>
-                <textarea id="bookingNotes" name="notes" maxlength="500" placeholder="¿Alguna petición para tu visita?"></textarea>
+                <label for="notes">Comentarios (opcional)</label>
+                <textarea id="notes" name="notes" maxlength="500" placeholder="Alguna petición para la visita..."></textarea>
               </div>
             </div>
 
-            <div class="check-row">
-              <input id="bookingConsent" type="checkbox" required>
-              <label for="bookingConsent">Confirmo que he revisado los datos de esta solicitud de demostración.</label>
+            <div class="field" style="position:absolute;left:-9999px" aria-hidden="true">
+              <label for="website">No rellenar</label>
+              <input id="website" name="website" tabindex="-1" autocomplete="off">
             </div>
 
-            <button class="btn btn-primary" type="submit" style="width:100%">Probar solicitud de reserva ↗</button>
-            <div class="form-message" id="bookingMessage" role="status" aria-live="polite"></div>
+            <div class="consent">
+              <input id="consent" name="consent" type="checkbox" required>
+              <label for="consent">Acepto que estos datos se utilicen para gestionar esta solicitud de demostración. No incluyas información sensible.</label>
+            </div>
+
+            <button class="btn btn-primary" id="sendBooking" type="submit" style="width:100%">Enviar solicitud informativa ↗</button>
+            <div class="status" id="bookingStatus" role="status" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -448,65 +463,60 @@
 
     <section class="account-section" id="cuenta">
       <div class="container">
-        <div class="account-box">
+        <div class="account-box reveal">
           <div class="eyebrow">Área de clientes</div>
           <h2>Tu cuenta, a tu manera</h2>
-          <p class="muted">Diseño de demostración para una futura zona de usuarios. El inicio de sesión real requiere configurar Firebase Authentication y sus proveedores.</p>
+          <p class="muted">La interfaz de acceso es una demostración. Para activar Google, Facebook y cuentas por correo hay que configurar un sistema de autenticación real.</p>
 
           <div class="auth-buttons">
             <button class="btn btn-outline" type="button" id="googleLogin">G · Continuar con Google</button>
             <button class="btn btn-outline" type="button" id="facebookLogin">f · Continuar con Facebook</button>
           </div>
 
-          <div class="separator">o con tu correo electrónico</div>
+          <div class="separator">o con correo electrónico</div>
 
           <form class="account-form" id="accountForm">
             <div class="field">
-              <label for="accountName">Nombre de usuario</label>
-              <input id="accountName" name="username" autocomplete="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9._-]+" placeholder="ejemplo_usuario">
+              <label for="username">Nombre de usuario</label>
+              <input id="username" name="username" minlength="3" maxlength="30" pattern="[A-Za-z0-9._-]+" autocomplete="username" required placeholder="usuario123">
             </div>
             <div class="field">
               <label for="accountEmail">Correo electrónico</label>
-              <input id="accountEmail" name="email" type="email" autocomplete="email" required placeholder="tu@email.com">
+              <input id="accountEmail" name="accountEmail" type="email" autocomplete="email" required placeholder="tu@email.com">
             </div>
             <div class="field">
-              <label for="accountPassword">Contraseña</label>
-              <input id="accountPassword" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Mínimo 8 caracteres">
+              <label for="password">Contraseña de prueba</label>
+              <input id="password" name="password" type="password" minlength="8" autocomplete="off" required placeholder="No uses tu contraseña real">
             </div>
-            <button class="btn btn-primary" type="submit">Probar acceso de demostración</button>
+            <button class="btn btn-primary" type="submit">Probar interfaz</button>
           </form>
 
-          <div class="account-status" id="accountStatus" role="status" aria-live="polite"></div>
-
-          <p class="account-note">
-            Seguridad: esta versión no crea cuentas ni comprueba contraseñas. No introduzcas contraseñas reales. No se guardan datos de acceso; el formulario solo demuestra la interfaz.
-          </p>
+          <div class="status" id="accountStatus" role="status" aria-live="polite"></div>
+          <p class="account-note">No se crean cuentas ni se guardan contraseñas en esta versión. No introduzcas una contraseña real.</p>
         </div>
       </div>
     </section>
 
     <section id="ubicacion">
       <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Ven a visitarnos</div>
+        <div class="section-head reveal">
+          <div class="eyebrow">Cómo llegar</div>
           <h2>Encuéntranos en Manresa</h2>
-          <p class="muted">El mapa muestra una búsqueda general. La dirección exacta debe verificarse antes de publicar la web como oficial.</p>
+          <p class="muted">Comprueba la dirección exacta del negocio antes de utilizar esta página como web oficial.</p>
         </div>
 
         <div class="location-grid">
-          <iframe
-            class="map-frame"
-            title="Mapa de búsqueda de El Graner en Manresa"
+          <iframe class="map-frame reveal"
+            title="Búsqueda de El Graner en Manresa"
             src="https://www.google.com/maps?q=El+Graner+Manresa&output=embed"
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-          <div class="location-card">
+          <div class="location-card reveal delay-1">
             <div class="eyebrow">Planifica tu visita</div>
-            <h3 class="serif" style="font-size:1.8rem;margin-top:12px">El Graner</h3>
+            <h3 class="serif" style="font-size:1.8rem;margin:12px 0">El Graner</h3>
             <p class="muted">Restaurante · Manresa</p>
-            <p class="muted">Comprueba la ubicación y los horarios reales antes de desplazarte.</p>
+            <p class="muted">La ubicación del mapa es una búsqueda general, no una dirección confirmada.</p>
             <a class="btn btn-outline" target="_blank" rel="noopener noreferrer"
               href="https://www.google.com/maps/search/?api=1&query=El+Graner+Manresa">Abrir Google Maps ↗</a>
           </div>
@@ -518,128 +528,219 @@
   <footer>
     <div class="container footer-inner">
       <a class="logo" href="#inicio">EL <span>GRANER</span></a>
-      <div class="footer-small">
-        Propuesta web no oficial creada por Abde con fines de demostración.
-        No está afiliada al restaurante. Las imágenes son ilustrativas y los datos del establecimiento están pendientes de verificación.
+      <div class="footer-note">
+        Propuesta web no oficial creada por Abde. No está afiliada al restaurante.
+        Los datos, las imágenes y la carta deben verificarse y contar con autorización antes de publicarse como página oficial.
       </div>
       <a class="muted" href="#inicio">Volver arriba ↑</a>
     </div>
   </footer>
 
+  <!-- EmailJS: librería oficial para enviar solicitudes desde el navegador -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <script>
     "use strict";
 
+    /*
+      CONFIGURACIÓN EMAILJS
+      Sustituye estos tres valores por los de TU cuenta EmailJS.
+      No pongas aquí ninguna clave privada.
+    */
+    const EMAILJS_PUBLIC_KEY = "TU_PUBLIC_KEY";
+    const EMAILJS_SERVICE_ID = "TU_SERVICE_ID";
+    const EMAILJS_TEMPLATE_ID = "TU_TEMPLATE_ID";
+
+    const emailIsConfigured =
+      EMAILJS_PUBLIC_KEY !== "TU_PUBLIC_KEY" &&
+      EMAILJS_SERVICE_ID !== "TU_SERVICE_ID" &&
+      EMAILJS_TEMPLATE_ID !== "TU_TEMPLATE_ID";
+
     const $ = (id) => document.getElementById(id);
 
-    // Menú móvil
-    $("menuToggle").addEventListener("click", () => {
-      const nav = $("navLinks");
-      const visible = nav.style.display === "flex";
-      nav.style.display = visible ? "" : "flex";
+    // Animaciones de entrada al desplazarse por la página
+    const revealItems = document.querySelectorAll(".reveal");
 
-      if (!visible) {
-        nav.style.flexDirection = "column";
-        nav.style.position = "absolute";
-        nav.style.top = "76px";
-        nav.style.left = "0";
-        nav.style.right = "0";
-        nav.style.padding = "22px";
-        nav.style.background = "#101510";
-        nav.style.borderBottom = "1px solid rgba(255,255,255,.12)";
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("visible"));
+    }
+
+    // Navegación móvil
+    $("menuToggle").addEventListener("click", () => {
+      const links = $("navLinks");
+      const isOpen = links.style.display === "flex";
+
+      links.style.display = isOpen ? "none" : "flex";
+      $("menuToggle").setAttribute("aria-expanded", String(!isOpen));
+
+      if (!isOpen) {
+        Object.assign(links.style, {
+          flexDirection: "column",
+          position: "absolute",
+          top: "76px",
+          left: "0",
+          right: "0",
+          padding: "22px",
+          background: "#101510",
+          borderBottom: "1px solid rgba(255,255,255,.12)"
+        });
       }
     });
 
-    $("navLinks").querySelectorAll("a").forEach(link => {
+    $("navLinks").querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         if (window.innerWidth <= 850) {
           $("navLinks").style.display = "none";
+          $("menuToggle").setAttribute("aria-expanded", "false");
         }
       });
     });
 
-    // Impedir fechas pasadas en el formulario
-    const dateInput = $("bookingDate");
-    const today = new Date();
-    const localToday = [
-      today.getFullYear(),
-      String(today.getMonth() + 1).padStart(2, "0"),
-      String(today.getDate()).padStart(2, "0")
+    // Fecha mínima: hoy, usando la fecha local
+    const dateInput = $("date");
+    const now = new Date();
+    const today = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, "0"),
+      String(now.getDate()).padStart(2, "0")
     ].join("-");
 
-    dateInput.min = localToday;
+    dateInput.min = today;
 
-    // Reserva: simulación local, no se envía al restaurante
-    $("bookingForm").addEventListener("submit", (event) => {
+    function showStatus(element, message, type) {
+      element.textContent = message;
+      element.className = "status show " + type;
+    }
+
+    // Envío de solicitud informativa por EmailJS
+    $("bookingForm").addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const message = $("bookingMessage");
-      const date = dateInput.value;
-      const selectedDate = new Date(date + "T12:00:00");
+      const form = event.currentTarget;
+      const status = $("bookingStatus");
+      const sendButton = $("sendBooking");
 
-      if (date < dateInput.min) {
-        message.textContent = "Selecciona una fecha válida.";
-        message.classList.add("show");
+      if (!form.reportValidity()) return;
+
+      // Campo trampa para reducir envíos automatizados
+      if ($("website").value.trim() !== "") return;
+
+      if (dateInput.value < dateInput.min) {
+        showStatus(status, "Selecciona una fecha válida, a partir de hoy.", "error");
         return;
       }
 
-      if (Number.isNaN(selectedDate.getTime())) {
-        message.textContent = "Revisa la fecha seleccionada.";
-        message.classList.add("show");
+      if (!emailIsConfigured || !window.emailjs) {
+        showStatus(
+          status,
+          "La web todavía no está conectada al correo. Configura EmailJS con tu Service ID, Template ID y Public Key. No se ha enviado ninguna solicitud.",
+          "info"
+        );
         return;
       }
 
-      const form = new FormData(event.currentTarget);
-      const name = String(form.get("name") || "").trim();
-      const time = String(form.get("time") || "");
-      const guests = String(form.get("guests") || "");
-
-      if (!name || !time || !guests) {
-        message.textContent = "Completa todos los campos obligatorios.";
-        message.classList.add("show");
-        return;
-      }
-
-      const formattedDate = selectedDate.toLocaleDateString("es-ES", {
-        day: "numeric",
+      const chosenDate = new Date(dateInput.value + "T12:00:00");
+      const formattedDate = chosenDate.toLocaleDateString("es-ES", {
+        day: "2-digit",
         month: "long",
         year: "numeric"
       });
 
-      message.textContent =
-        "¡Prueba completada, " + name + "! Tu formulario de ejemplo indica " +
-        guests + " persona(s), el " + formattedDate + " a las " + time +
-        ". Atención: NO se ha enviado ninguna reserva real al restaurante.";
+      const params = {
+        name: $("name").value.trim(),
+        email: $("email").value.trim(),
+        reply_to: $("email").value.trim(),
+        date: formattedDate,
+        time: $("time").value,
+        guests: $("guests").value,
+        phone: $("phone").value.trim() || "No indicado",
+        notes: $("notes").value.trim() || "Sin comentarios",
+        restaurant: "El Graner (solicitud informativa)",
+        message:
+          "Solicitud informativa, no reserva confirmada. " +
+          "Nombre: " + $("name").value.trim() +
+          "; fecha: " + formattedDate +
+          "; hora: " + $("time").value +
+          "; personas: " + $("guests").value +
+          "; teléfono: " + ($("phone").value.trim() || "No indicado") +
+          "; comentarios: " + ($("notes").value.trim() || "Ninguno")
+      };
 
-      message.classList.add("show");
+      sendButton.disabled = true;
+      sendButton.textContent = "Enviando solicitud...";
+
+      try {
+        const response = await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          params,
+          { publicKey: EMAILJS_PUBLIC_KEY }
+        );
+
+        if (response.status === 200) {
+          showStatus(
+            status,
+            "La solicitud informativa se ha enviado por correo. Esto no confirma una mesa: el restaurante tendría que revisar y confirmar la disponibilidad.",
+            "success"
+          );
+          form.reset();
+          dateInput.min = today;
+        } else {
+          throw new Error("Respuesta inesperada del servicio de correo.");
+        }
+      } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
+        showStatus(
+          status,
+          "No se pudo enviar el correo. Comprueba la configuración de EmailJS e inténtalo de nuevo.",
+          "error"
+        );
+      } finally {
+        sendButton.disabled = false;
+        sendButton.textContent = "Enviar solicitud informativa ↗";
+      }
     });
 
-    // Acceso de ejemplo: no crea cuentas y no guarda contraseñas
+    // Acceso ficticio: no procesa ni almacena contraseñas
     $("accountForm").addEventListener("submit", (event) => {
       event.preventDefault();
-
       const form = event.currentTarget;
-      const username = $("accountName").value.trim();
-      const email = $("accountEmail").value.trim();
-
       if (!form.reportValidity()) return;
 
-      $("accountStatus").textContent =
-        "Interfaz probada para " + username + " (" + email +
-        "). No se ha creado ninguna cuenta ni se ha guardado la contraseña. Configura Firebase para activar el acceso real.";
+      showStatus(
+        $("accountStatus"),
+        "Demostración visual completada. No se ha creado una cuenta ni guardado la contraseña. No uses contraseñas reales aquí.",
+        "info"
+      );
 
-      // Limpiar la contraseña inmediatamente
-      $("accountPassword").value = "";
+      $("password").value = "";
     });
 
-    // OAuth necesita configuración real de Firebase y de cada proveedor
     $("googleLogin").addEventListener("click", () => {
-      $("accountStatus").textContent =
-        "Google todavía no está conectado. Hay que configurar un proyecto Firebase, activar Google Authentication y añadir el dominio de la web.";
+      showStatus(
+        $("accountStatus"),
+        "Google aún no está conectado. Para activarlo hay que configurar un proyecto de Firebase y habilitar Google Authentication.",
+        "info"
+      );
     });
 
     $("facebookLogin").addEventListener("click", () => {
-      $("accountStatus").textContent =
-        "Facebook todavía no está conectado. Hace falta configurar Firebase Authentication y una aplicación de Facebook válida.";
+      showStatus(
+        $("accountStatus"),
+        "Facebook aún no está conectado. Para activarlo hay que configurar Facebook Login y Firebase Authentication.",
+        "info"
+      );
     });
   </script>
 </body>
