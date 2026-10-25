@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101510">
+  <meta name="description" content="Propuesta de página web para El Graner, Manresa. Descubre el restaurante y solicita una reserva de mesa.">
+  <title>El Graner | Restaurante en Manresa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #101510;
+      --panel: #192019;
+      --green: #c3e6a0;
+      --cream: #f7f3e9;
+      --muted: #b6b9af;
+      --line: rgba(255,255,255,.12);
+      --gold: #d5b879;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--cream);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+
+    body, input, select, button { font-family: "DM Sans", sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    img { display: block; width: 100%; object-fit: cover; }
+    .container { width: min(1120px, 90%); margin: auto; }
+    .serif { font-family: "Playfair Display", serif; }
+    .muted { color: var(--muted); }
+    .eyebrow {
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .demo-banner {
+      background: #273522;
+      color: #e9f4dd;
+      padding: 8px 15px;
+      text-align: center;
+      font-size: .78rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(16,21,16,.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .logo { font-size: 1.45rem; font-weight: 700; letter-spacing: .08em; }
+    .logo span { color: var(--green); }
+    .nav-links { display: flex; align-items: center; gap: 25px; font-size: .9rem; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 45px;
+      padding: 11px 18px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .9rem;
+      transition: .2s;
+    }
+    .btn-primary { background: var(--green); color: #172015; }
+    .btn-primary:hover { background: #d8f2bd; transform: translateY(-1px); }
+    .btn-outline { border-color: var(--line); background: transparent; color: var(--cream); }
+    .btn-outline:hover { border-color: var(--green); }
+    .btn-dark { background: #242b22; color: var(--cream); border-color: var(--line); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+
+    .hero {
+      min-height: 630px;
+      display: grid;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(16,21,16,.98) 0%, rgba(16,21,16,.84) 45%, rgba(16,21,16,.18) 100%),
+        url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=85") center/cover;
+    }
+
+    .hero-content { max-width: 660px; padding: 90px 0; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3.3rem, 8vw, 6.4rem);
+      line-height: 1.03;
+      margin: 18px 0 22px;
+      font-weight: 500;
+    }
+    h1 em { color: var(--green); font-style: normal; }
+    .hero p { color: #e0e0d8; max-width: 500px; font-size: 1.08rem; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .hero-note { margin-top: 24px; font-size: .78rem; color: #d1d2c9; }
+
+    section { padding: 90px 0; }
+    .section-head { max-width: 650px; margin-bottom: 38px; }
+    h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      font-weight: 500;
+      margin: 12px 0 16px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+    .intro-image { height: 430px; border-radius: 8px; }
+    .intro-copy p { color: var(--muted); }
+    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 25px; }
+    .feature { padding: 15px; border: 1px solid var(--line); border-radius: 6px; }
+    .feature strong { display: block; color: var(--green); margin-bottom: 4px; }
+    .feature span { font-size: .83rem; color: var(--muted); }
+
+    .menu-section { background: #151b15; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .menu-card {
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .menu-card img { height: 210px; }
+    .menu-card-content { padding: 22px; }
+    .menu-card h3 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .menu-card p { color: var(--muted); font-size: .92rem; margin-bottom: 0; }
+    .menu-disclaimer { font-size: .8rem; color: var(--muted); margin-top: 22px; }
+
+    .booking-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 55px; align-items: start; }
+    .booking-info { padding-top: 12px; }
+    .info-line { padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .info-line strong { display: block; color: var(--green); margin-bottom: 5px; }
+    .info-line span { color: var(--muted); font-size: .93rem; overflow-wrap: anywhere; }
+    .booking-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 30px; }
+    .booking-card h3 { font-family: "Playfair Display", serif; font-size: 1.8rem; margin-bottom: 8px; }
+    .booking-card > p { color: var(--muted); font-size: .9rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px; margin-top: 25px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-size: .84rem; font-weight: 600; }
+    input, select, textarea {
+      width: 100%;
+      background: #101510;
+      color: var(--cream);
+      border: 1px solid #3b4438;
+      border-radius: 5px;
+      padding: 12px;
+      font-size: .92rem;
+      min-height: 46px;
+    }
+    textarea { resize: vertical; min-height: 85px; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+    input[type="checkbox"] { width: 17px; min-height: auto; accent-color: var(--green); }
+    .check-row { display: flex; gap: 9px; align-items: flex-start; margin: 18px 0; font-size: .8rem; color: var(--muted); }
+    .check-row label { font-weight: 400; }
+    .form-message { display: none; padding: 14px; margin-top: 18px; border-radius: 5px; background: #273522; color: #e9f4dd; font-size: .9rem; }
+    .form-message.show { display: block; }
+
+    .account-section { background: #151b15; }
+    .account-box { max-width: 720px; margin: auto; background: var(--panel); padding: 35px; border: 1px solid var(--line); border-radius: 10px; }
+    .account-box h2 { font-size: 2.5rem; }
+    .auth-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
+    .auth-buttons button { width: 100%; }
+    .separator { display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: .8rem; margin: 20px 0; }
+    .separator::before, .separator::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+    .account-form { display: grid; gap: 14px; }
+    .account-note { font-size: .8rem; color: var(--muted); margin: 16px 0 0; }
+    .account-status { margin-top: 16px; font-size: .9rem; color: var(--green); overflow-wrap: anywhere; }
+
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; align-items: stretch; }
+    .map-frame { border: 0; width: 100%; height: 330px; border-radius: 8px; background: var(--panel); }
+    .location-card { padding: 25px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+    footer { border-top: 1px solid var(--line); padding: 35px 0; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .footer-small { color: var(--muted); font-size: .8rem; max-width: 660px; }
+
+    .mobile-menu { display: none; }
+
+    @media (max-width: 850px) {
+      .nav-links { display: none; }
+      .mobile-menu { display: inline-flex; }
+      .intro-grid, .booking-grid, .location-grid { grid-template-columns: 1fr; gap: 30px; }
+      .intro-image { height: 320px; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .hero { min-height: 560px; }
+      section { padding: 65px 0; }
+    }
+
+    @media (max-width: 560px) {
+      .nav-actions .btn-outline { display: none; }
+      .logo { font-size: 1.2rem; }
+      .hero { min-height: 560px; background-position: 60% center; }
+      .hero-content { padding: 65px 0; }
+      .menu-grid, .feature-list, .form-grid, .auth-buttons { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .booking-card, .account-box { padding: 22px; }
+      .menu-card img { height: 190px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="demo-banner">
+    DEMOSTRACIÓN NO OFICIAL · Propuesta de diseño creada por Abde
+  </div>
+
+  <header>
+    <nav class="container">
+      <a class="logo" href="#inicio" aria-label="El Graner, inicio">EL <span>GRANER</span></a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#nosotros">El restaurante</a>
+        <a href="#carta">Carta</a>
+        <a href="#reservas">Reservas</a>
+        <a href="#ubicacion">Ubicación</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="#cuenta">Mi cuenta</a>
+        <a class="btn btn-primary" href="#reservas">Reservar mesa</a>
+        <button class="btn btn-outline mobile-menu" id="menuToggle" type="button" aria-label="Mostrar navegación">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Una propuesta gastronómica · Manresa</div>
+          <h1 class="serif">Buen producto.<br><em>Buenos momentos.</em></h1>
+          <p>Un espacio pensado para compartir, descubrir nuevos sabores y disfrutar de una buena mesa.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#reservas">Solicitar una reserva ↗</a>
+            <a class="btn btn-outline" href="#carta">Descubrir la carta</a>
+          </div>
+          <div class="hero-note">Las fotografías y los textos de esta página son ilustrativos.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros">
+      <div class="container intro-grid">
+        <img class="intro-image"
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1100&q=85"
+          alt="Mesa preparada en un restaurante"
+          loading="lazy">
+
+        <div class="intro-copy">
+          <div class="eyebrow">El placer de compartir</div>
+          <h2>Una mesa para cada ocasión</h2>
+          <p>Una comida especial, una cena con amigos o un encuentro en familia: cada momento merece su espacio.</p>
+          <p>Esta propuesta de página web está diseñada para presentar el restaurante, facilitar las consultas y permitir que los clientes soliciten una mesa desde el móvil.</p>
+
+          <div class="feature-list">
+            <div class="feature">
+              <strong>01 · Restaurante</strong>
+              <span>Información y presentación</span>
+            </div>
+            <div class="feature">
+              <strong>02 · Carta</strong>
+              <span>Platos y especialidades</span>
+            </div>
+            <div class="feature">
+              <strong>03 · Reservas</strong>
+              <span>Formulario sencillo</span>
+            </div>
+            <div class="feature">
+              <strong>04 · Contacto</strong>
+              <span>Ubicación y consultas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="carta">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Nuestra propuesta</div>
+          <h2>Una carta que invita a disfrutar</h2>
+          <p class="muted">Ejemplos visuales para mostrar cómo podría organizarse la carta del restaurante.</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+              alt="Ensalada fresca" loading="lazy">
+            <div class="menu-card-content">
+              <h3>Para empezar</h3>
+              <p>Una selección de entrantes para abrir el apetito y compartir en la mesa.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+              alt="Plato de carne preparado" loading="lazy">
+            <div class="menu-card-content">
+              <h3>Platos principales</h3>
+              <p>Un espacio para destacar las especialidades y los platos más populares.</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80"
+              alt="Postre servido en un plato" loading="lazy">
+            <div class="menu-card-content">
+              <h3>El toque dulce</h3>
+              <p>Postres y propuestas para terminar la experiencia con buen sabor.</p>
+            </div>
+          </article>
+        </div>
+
+        <p class="menu-disclaimer">
+          Nota: estos platos, fotografías y descripciones son ejemplos. No representan la carta real ni confirman disponibilidad, ingredientes o precios.
+        </p>
+      </div>
+    </section>
+
+    <section id="reservas">
+      <div class="container booking-grid">
+        <div class="booking-info">
+          <div class="eyebrow">Tu próxima visita</div>
+          <h2>Solicita tu mesa</h2>
+          <p class="muted">Indica cuándo te gustaría venir y cuántas personas sois. En esta versión de demostración la solicitud no se envía al restaurante.</p>
+
+          <div class="info-line">
+            <strong>Ubicación</strong>
+            <span>Manresa, Barcelona · Dirección pendiente de confirmar</span>
+          </div>
+          <div class="info-line">
+            <strong>Horario</strong>
+            <span>Consulta los horarios reales del establecimiento antes de visitarlo.</span>
+          </div>
+          <div class="info-line">
+            <strong>Confirmación</strong>
+            <span>Una reserva real necesita conexión con el restaurante o con un sistema de reservas.</span>
+          </div>
+        </div>
+
+        <div class="booking-card">
+          <h3>Reserva una mesa</h3>
+          <p>Completa los datos de tu solicitud.</p>
+
+          <form id="bookingForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="bookingName">Nombre y apellidos</label>
+                <input id="bookingName" name="name" autocomplete="name" required maxlength="100" placeholder="Tu nombre">
+              </div>
+
+              <div class="field">
+                <label for="bookingEmail">Correo electrónico</label>
+                <input id="bookingEmail" name="email" type="email" autocomplete="email" required maxlength="150" placeholder="nombre@correo.com">
+              </div>
+
+              <div class="field">
+                <label for="bookingDate">Fecha</label>
+                <input id="bookingDate" name="date" type="date" required>
+              </div>
+
+              <div class="field">
+                <label for="bookingTime">Hora solicitada</label>
+                <select id="bookingTime" name="time" required>
+                  <option value="">Selecciona una hora</option>
+                  <option>13:00</option>
+                  <option>13:30</option>
+                  <option>14:00</option>
+                  <option>14:30</option>
+                  <option>20:00</option>
+                  <option>20:30</option>
+                  <option>21:00</option>
+                  <option>21:30</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="bookingGuests">Número de personas</label>
+                <select id="bookingGuests" name="guests" required>
+                  <option value="1">1 persona</option>
+                  <option value="2" selected>2 personas</option>
+                  <option value="3">3 personas</option>
+                  <option value="4">4 personas</option>
+                  <option value="5">5 personas</option>
+                  <option value="6">6 personas</option>
+                  <option value="7">7 personas</option>
+                  <option value="8">8 personas</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="bookingPhone">Teléfono (opcional)</label>
+                <input id="bookingPhone" name="phone" type="tel" autocomplete="tel" maxlength="30" placeholder="Tu teléfono">
+              </div>
+
+              <div class="field full">
+                <label for="bookingNotes">Comentarios (opcional)</label>
+                <textarea id="bookingNotes" name="notes" maxlength="500" placeholder="¿Alguna petición para tu visita?"></textarea>
+              </div>
+            </div>
+
+            <div class="check-row">
+              <input id="bookingConsent" type="checkbox" required>
+              <label for="bookingConsent">Confirmo que he revisado los datos de esta solicitud de demostración.</label>
+            </div>
+
+            <button class="btn btn-primary" type="submit" style="width:100%">Probar solicitud de reserva ↗</button>
+            <div class="form-message" id="bookingMessage" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="account-section" id="cuenta">
+      <div class="container">
+        <div class="account-box">
+          <div class="eyebrow">Área de clientes</div>
+          <h2>Tu cuenta, a tu manera</h2>
+          <p class="muted">Diseño de demostración para una futura zona de usuarios. El inicio de sesión real requiere configurar Firebase Authentication y sus proveedores.</p>
+
+          <div class="auth-buttons">
+            <button class="btn btn-outline" type="button" id="googleLogin">G · Continuar con Google</button>
+            <button class="btn btn-outline" type="button" id="facebookLogin">f · Continuar con Facebook</button>
+          </div>
+
+          <div class="separator">o con tu correo electrónico</div>
+
+          <form class="account-form" id="accountForm">
+            <div class="field">
+              <label for="accountName">Nombre de usuario</label>
+              <input id="accountName" name="username" autocomplete="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9._-]+" placeholder="ejemplo_usuario">
+            </div>
+            <div class="field">
+              <label for="accountEmail">Correo electrónico</label>
+              <input id="accountEmail" name="email" type="email" autocomplete="email" required placeholder="tu@email.com">
+            </div>
+            <div class="field">
+              <label for="accountPassword">Contraseña</label>
+              <input id="accountPassword" name="password" type="password" autocomplete="current-password" required minlength="8" placeholder="Mínimo 8 caracteres">
+            </div>
+            <button class="btn btn-primary" type="submit">Probar acceso de demostración</button>
+          </form>
+
+          <div class="account-status" id="accountStatus" role="status" aria-live="polite"></div>
+
+          <p class="account-note">
+            Seguridad: esta versión no crea cuentas ni comprueba contraseñas. No introduzcas contraseñas reales. No se guardan datos de acceso; el formulario solo demuestra la interfaz.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ubicacion">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Ven a visitarnos</div>
+          <h2>Encuéntranos en Manresa</h2>
+          <p class="muted">El mapa muestra una búsqueda general. La dirección exacta debe verificarse antes de publicar la web como oficial.</p>
+        </div>
+
+        <div class="location-grid">
+          <iframe
+            class="map-frame"
+            title="Mapa de búsqueda de El Graner en Manresa"
+            src="https://www.google.com/maps?q=El+Graner+Manresa&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+
+          <div class="location-card">
+            <div class="eyebrow">Planifica tu visita</div>
+            <h3 class="serif" style="font-size:1.8rem;margin-top:12px">El Graner</h3>
+            <p class="muted">Restaurante · Manresa</p>
+            <p class="muted">Comprueba la ubicación y los horarios reales antes de desplazarte.</p>
+            <a class="btn btn-outline" target="_blank" rel="noopener noreferrer"
+              href="https://www.google.com/maps/search/?api=1&query=El+Graner+Manresa">Abrir Google Maps ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="#inicio">EL <span>GRANER</span></a>
+      <div class="footer-small">
+        Propuesta web no oficial creada por Abde con fines de demostración.
+        No está afiliada al restaurante. Las imágenes son ilustrativas y los datos del establecimiento están pendientes de verificación.
+      </div>
+      <a class="muted" href="#inicio">Volver arriba ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const $ = (id) => document.getElementById(id);
+
+    // Menú móvil
+    $("menuToggle").addEventListener("click", () => {
+      const nav = $("navLinks");
+      const visible = nav.style.display === "flex";
+      nav.style.display = visible ? "" : "flex";
+
+      if (!visible) {
+        nav.style.flexDirection = "column";
+        nav.style.position = "absolute";
+        nav.style.top = "76px";
+        nav.style.left = "0";
+        nav.style.right = "0";
+        nav.style.padding = "22px";
+        nav.style.background = "#101510";
+        nav.style.borderBottom = "1px solid rgba(255,255,255,.12)";
+      }
+    });
+
+    $("navLinks").querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 850) {
+          $("navLinks").style.display = "none";
+        }
+      });
+    });
+
+    // Impedir fechas pasadas en el formulario
+    const dateInput = $("bookingDate");
+    const today = new Date();
+    const localToday = [
+      today.getFullYear(),
+      String(today.getMonth() + 1).padStart(2, "0"),
+      String(today.getDate()).padStart(2, "0")
+    ].join("-");
+
+    dateInput.min = localToday;
+
+    // Reserva: simulación local, no se envía al restaurante
+    $("bookingForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const message = $("bookingMessage");
+      const date = dateInput.value;
+      const selectedDate = new Date(date + "T12:00:00");
+
+      if (date < dateInput.min) {
+        message.textContent = "Selecciona una fecha válida.";
+        message.classList.add("show");
+        return;
+      }
+
+      if (Number.isNaN(selectedDate.getTime())) {
+        message.textContent = "Revisa la fecha seleccionada.";
+        message.classList.add("show");
+        return;
+      }
+
+      const form = new FormData(event.currentTarget);
+      const name = String(form.get("name") || "").trim();
+      const time = String(form.get("time") || "");
+      const guests = String(form.get("guests") || "");
+
+      if (!name || !time || !guests) {
+        message.textContent = "Completa todos los campos obligatorios.";
+        message.classList.add("show");
+        return;
+      }
+
+      const formattedDate = selectedDate.toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+      message.textContent =
+        "¡Prueba completada, " + name + "! Tu formulario de ejemplo indica " +
+        guests + " persona(s), el " + formattedDate + " a las " + time +
+        ". Atención: NO se ha enviado ninguna reserva real al restaurante.";
+
+      message.classList.add("show");
+    });
+
+    // Acceso de ejemplo: no crea cuentas y no guarda contraseñas
+    $("accountForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const username = $("accountName").value.trim();
+      const email = $("accountEmail").value.trim();
+
+      if (!form.reportValidity()) return;
+
+      $("accountStatus").textContent =
+        "Interfaz probada para " + username + " (" + email +
+        "). No se ha creado ninguna cuenta ni se ha guardado la contraseña. Configura Firebase para activar el acceso real.";
+
+      // Limpiar la contraseña inmediatamente
+      $("accountPassword").value = "";
+    });
+
+    // OAuth necesita configuración real de Firebase y de cada proveedor
+    $("googleLogin").addEventListener("click", () => {
+      $("accountStatus").textContent =
+        "Google todavía no está conectado. Hay que configurar un proyecto Firebase, activar Google Authentication y añadir el dominio de la web.";
+    });
+
+    $("facebookLogin").addEventListener("click", () => {
+      $("accountStatus").textContent =
+        "Facebook todavía no está conectado. Hace falta configurar Firebase Authentication y una aplicación de Facebook válida.";
+    });
+  </script>
+</body>
+</html>
